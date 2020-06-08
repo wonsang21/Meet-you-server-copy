@@ -30,10 +30,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       blood: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM({ values: ['A', 'B', 'AB', 'O'] }),
       },
       gender: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM({
+          values: ['man', 'women'],
+        }),
       },
       drinking: {
         type: Sequelize.STRING,
