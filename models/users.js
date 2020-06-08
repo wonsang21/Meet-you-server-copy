@@ -25,14 +25,18 @@ module.exports = (sequelize, DataTypes) => {
       drinking: DataTypes.STRING,
       smoking: DataTypes.STRING,
       job: DataTypes.STRING,
-      point: DataTypes.INTEGER,
+      point: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
       school: DataTypes.STRING,
     },
     {}
   );
   users.associate = function (models) {
-    models;
-    // associations can be defined here
+    users.belongsToMany(models.hobby, {
+      through: 'hobby_Data',
+    });
   };
   return users;
 };
