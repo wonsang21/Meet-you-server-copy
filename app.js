@@ -17,6 +17,10 @@ app.use(
   })
 );
 
+app.get('/', (req, res) => {
+  res.send('Hello Express');
+});
+
 app.use('/user', userRouter);
 
 models.sequelize
