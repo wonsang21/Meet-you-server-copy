@@ -1,6 +1,6 @@
 'use strict';
-const crypto = require('crypto');
 
+const crypto = require('crypto');
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define(
     'users',
