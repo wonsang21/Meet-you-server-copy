@@ -11,11 +11,9 @@ module.exports = {
       age: {
         type: Sequelize.STRING,
       },
-      email: {
-        type: Sequelize.STRING,
-      },
       password: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       address: {
         type: Sequelize.STRING,
@@ -48,22 +46,14 @@ module.exports = {
       },
       point: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       school: {
         type: Sequelize.STRING,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
     });
   },
-  down: (queryInterface, Sequelize) => {
-    Sequelize;
+  down: (queryInterface) => {
     return queryInterface.dropTable('users');
   },
 };

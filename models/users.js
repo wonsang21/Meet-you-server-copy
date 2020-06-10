@@ -26,7 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       drinking: DataTypes.STRING,
       smoking: DataTypes.STRING,
       job: DataTypes.STRING,
-      point: DataTypes.INTEGER,
+      point: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
       school: DataTypes.STRING,
     },
     {
@@ -42,8 +45,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   users.associate = function (models) {
-    models;
-    // associations can be defined here
+    users.belongsToMany(models.hobby, {
+      through: 'hobby_Data',
+      foreignKey: 'userId',
+    }),
+      users.belongsToMany(models.personality, {
+        through: 'personality_Data',
+        foreignKey: 'userId',
+      });
+    users.belongsToMany(models.idealType, {
+      through: 'idealType_Data',
+      foreignKey: 'userId',
+    });
+
+    // users.belongsToMany(models.miniGame, {
+    //   through: 'miniGame_Data',
+    //   foreignKey: 'userId',
+    // });
   };
+
   return users;
 };
