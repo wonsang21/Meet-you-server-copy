@@ -1,10 +1,12 @@
 'use strict';
+
+const crypto = require('crypto');
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define(
     'users',
     {
       age: DataTypes.STRING,
-      email: {
+      username: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -13,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       address: DataTypes.STRING,
-      username: DataTypes.STRING,
       profile_Photo: DataTypes.STRING,
       nickname: DataTypes.STRING,
       blood: DataTypes.ENUM({
@@ -31,7 +32,17 @@ module.exports = (sequelize, DataTypes) => {
       },
       school: DataTypes.STRING,
     },
-    {}
+    {
+      timestamps: false,
+      hooks: {
+        afterValidate: (data) => {
+          var shasum = crypto.createHash('sha1');
+          let salt = 'random string';
+          shasum.update(data.password + salt);
+          data.password = shasum.digest('hex');
+        },
+      },
+    }
   );
   users.associate = function (models) {
     users.belongsToMany(models.hobby, {
