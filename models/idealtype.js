@@ -8,8 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   idealType.associate = function (models) {
-    models;
-    // associations can be defined here
+    idealType.belongsToMany(models.users, {
+      through: 'idealType_Data',
+      foreignKey: 'idealTypeId',
+    });
   };
   return idealType;
 };

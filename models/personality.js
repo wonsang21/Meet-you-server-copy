@@ -8,8 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   personality.associate = function (models) {
-    models;
-    // associations can be defined here
+    personality.belongsToMany(models.users, {
+      through: 'personality_Data',
+      foreignKey: 'personalityId',
+    });
   };
   return personality;
 };
+``;

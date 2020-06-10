@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   miniGame.associate = function (models) {
     models;
-    // associations can be defined here
+    miniGame.belongsToMany(models.users, {
+      through: 'miniGame_Data',
+      foreignKey: 'miniGameId',
+    });
   };
   return miniGame;
 };

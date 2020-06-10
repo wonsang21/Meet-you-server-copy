@@ -36,7 +36,22 @@ module.exports = (sequelize, DataTypes) => {
   users.associate = function (models) {
     users.belongsToMany(models.hobby, {
       through: 'hobby_Data',
+      foreignKey: 'userId',
+    }),
+      users.belongsToMany(models.personality, {
+        through: 'personality_Data',
+        foreignKey: 'userId',
+      });
+    users.belongsToMany(models.idealType, {
+      through: 'idealType_Data',
+      foreignKey: 'userId',
+    });
+
+    users.belongsToMany(models.miniGame, {
+      through: 'miniGame_Data',
+      foreignKey: 'userId',
     });
   };
+
   return users;
 };
