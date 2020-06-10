@@ -11,10 +11,6 @@ module.exports = {
       age: {
         type: Sequelize.STRING,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -54,14 +50,6 @@ module.exports = {
       },
       school: {
         type: Sequelize.STRING,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
       },
     });
   },

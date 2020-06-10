@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       personalitylist: DataTypes.STRING,
     },
-    {}
+    { timestamps: false }
   );
   personality.associate = function (models) {
     personality.belongsToMany(models.users, {

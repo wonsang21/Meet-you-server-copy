@@ -6,14 +6,14 @@ module.exports = (sequelize, DataTypes) => {
       problem: DataTypes.STRING,
       solution: DataTypes.STRING,
     },
-    {}
+    { timestamps: false }
   );
   miniGame.associate = function (models) {
     models;
-    miniGame.belongsToMany(models.users, {
-      through: 'miniGame_Data',
-      foreignKey: 'miniGameId',
-    });
+    // miniGame.belongsToMany(models.users, {
+    //   through: 'miniGame_Data',
+    //   foreignKey: 'miniGameId',
+    // });
   };
   return miniGame;
 };

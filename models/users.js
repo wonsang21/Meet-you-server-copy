@@ -58,10 +58,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
     });
 
-    users.belongsToMany(models.miniGame, {
-      through: 'miniGame_Data',
-      foreignKey: 'userId',
-    });
+    // users.belongsToMany(models.miniGame, {
+    //   through: 'miniGame_Data',
+    //   foreignKey: 'userId',
+    // });
   };
 
   return users;

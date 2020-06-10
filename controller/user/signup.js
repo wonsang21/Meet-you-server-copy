@@ -14,9 +14,9 @@ module.exports = {
       drinking,
       smoking,
       job,
-      scholl,
+      school,
     } = req.body;
-    console.log('body', req.body);
+
     users
       .findOrCreate({
         where: {
@@ -33,7 +33,7 @@ module.exports = {
           drinking: drinking,
           smoking: smoking,
           job: job,
-          scholl: scholl,
+          scholl: school,
         },
       })
       .then(async ([users, created]) => {
@@ -42,6 +42,7 @@ module.exports = {
           return res.status(409).send('Already exists user');
         }
         const data = await users.get({ plain: true });
+
         res.status(201).json(data);
       });
   },

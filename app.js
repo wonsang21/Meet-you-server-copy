@@ -24,11 +24,11 @@ app.get('/', (req, res) => {
 app.use('/user', userRouter);
 
 const reqBody = {
-  email: '동현킴777@gmail.com', // 나중에 수정
+  // userId : 1
   password: 'dogn1234!#',
   age: 27,
   address: '울산',
-  username: '김동현',
+  username: '김동구리1232222',
   profile_Photo: 'agch4det3@442$%%@',
   nickname: '메로짱',
   blood: 'B',
@@ -45,7 +45,7 @@ const reqBody = {
 models.users
   .findOrCreate({
     where: {
-      email: reqBody.email,
+      username: reqBody.username,
     },
     defaults: {
       password: reqBody.password,
@@ -67,22 +67,25 @@ models.users
       console.log('아이디 있음!');
       return;
     } else {
-      const { hobby, personality, idealType } = reqBody;
+      const { hobby, personality, idealType } = reqBody; // hobby = [asdasdsd, asdas]
       const models_Data = [models.hobby, models.personality, models.idealType];
       const list_Data = ['hobbylist', 'personalitylist', 'idealTypelist'];
       const user_Data = [hobby, personality, idealType];
 
       for (let i = 0; i < models_Data.length; i++) {
-        models_Data[i]
+        models_Data[i] // models.hobby
           .findAll({
             where: {
               [list_Data[i]]: user_Data[i],
+              // 'hobbylist': ['운동', '책읽기']
             },
           })
+
           .then((values) => {
             /* values = [{id:1, hobbylist: '운동'},{id:2, hobbylist: '여행'}] */
             const set_Data = [
               list_Data[i] === 'hobbylist' ? user.setHobbies(values) : null,
+
               list_Data[i] === 'personalitylist'
                 ? user.setPersonalities(values)
                 : null,
@@ -98,7 +101,7 @@ models.users
   });
 
 /* id가 1인 유저의 모든 데이터를 데이터베이스에서 가져올려면? */
-const reqLoginBody = 2;
+const reqLoginBody = 1;
 models.users
   .findOne({
     where: {
@@ -110,7 +113,7 @@ models.users
         attributes: ['hobbylist'],
       },
     ],
-  })
+  }) // [{id: 3, username: asd}, {id: 5, username: zmsmnsns}]
   .then((data) => {
     console.log('DATABASE GET DATA: ', JSON.stringify(data));
   });
