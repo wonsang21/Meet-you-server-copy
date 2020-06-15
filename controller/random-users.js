@@ -49,7 +49,6 @@ module.exports = {
               ],
             })
             .then(async (users) => {
-              console.log(users);
               if (users.length === 0) {
                 return reject('가입한 남자 유저 또는 여자 유저가 없습니다.');
               }

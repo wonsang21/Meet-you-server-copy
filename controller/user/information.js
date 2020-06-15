@@ -33,7 +33,6 @@ module.exports = {
         ],
       })
       .then(async (user) => {
-        console.log(user);
         const gender = user.dataValues.gender;
         const randomUsers = await findRandomUsers(gender);
         const filterUserHPI = await filterHPIData(JSON.stringify(user));

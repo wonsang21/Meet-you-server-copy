@@ -32,7 +32,6 @@ module.exports = {
               expiresIn: '24h',
             }
           );
-          console.log(accessToken);
           res.status(200).send({ accessToken: accessToken });
         }
       })
