@@ -2,9 +2,9 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOSTNAME,
+    username: process.env.RDS_USERNAME,
+    password: process.env.RDS_USERNAME,
+    host: process.env.RDS_USERNAME,
     database: 'meetyouDB',
     dialect: 'mysql',
     operatorsAliases: false,
