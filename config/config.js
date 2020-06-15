@@ -15,6 +15,7 @@ module.exports = {
     host: process.env.RDS_HOSTNAME,
     database: 'Meet-you',
     dialect: 'mysql',
+    port: 13306,
     operatorsAliases: false,
   },
 };
