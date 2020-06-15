@@ -1,0 +1,12 @@
+GET http://localhost:5000/user/information
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iu2dpeuvvOyVhCDsoJzrsJwiLCJwYXNzd29yZCI6ImNkODNhMWE3ZGVlMDVlYWM4ODQyOWI1NDU4OGUyNWQ0ZDA2ZWFlOTgiLCJpYXQiOjE1OTIxODk3MzQsImV4cCI6MTU5MjI3NjEzNH0.xCYBSvzUxQWJUSFN_rF0k5dEirO6dZAD5CPNBxhPlXQ
+
+######
+
+POST http://localhost:5000/user/login
+Content-Type: application/json
+
+{
+  "username": "흥민아 제발",
+  "password": "superson123@"
+}
