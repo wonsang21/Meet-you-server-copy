@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -5,6 +7,8 @@ const bodyParser = require('body-parser');
 const models = require('./models/index');
 const app = express();
 const userRouter = require('./routes/user');
+
+// const jwt = require('jsonwebtoken');
 
 app.use(bodyParser.json());
 // app.use(express.urlencoded({ extended: true }));
@@ -23,24 +27,6 @@ app.get('/', (req, res) => {
 
 app.use('/user', userRouter);
 
-/* id가 1인 유저의 모든 데이터를 데이터베이스에서 가져올려면? */
-const reqLoginBody = 1;
-models.users
-  .findOne({
-    where: {
-      id: reqLoginBody,
-    },
-    include: [
-      {
-        model: models.hobby,
-        attributes: ['hobbylist'],
-      },
-    ],
-  }) // [{id: 3, username: asd}, {id: 5, username: zmsmnsns}]
-  .then((data) => {
-    console.log('DATABASE GET DATA: ', JSON.stringify(data));
-  });
-
 const port = 5000;
 app.listen(port, () => {
   console.log(`server listen on 5000`);
@@ -55,8 +41,6 @@ models.sequelize
     console.log('DB 연결 실패ㅠㅠ');
     console.log(err);
   });
-
-// inclued => 조인할
 
 // const reqBody = {
 //   // userId : 1
@@ -145,4 +129,51 @@ models.sequelize
 //     .then((hobby_User_Data) => { /* hobby_User_Data = [{id:1, hobbylist: '운동'},{id:4, hobbylist: '여행'}] */
 //       user.setHobbies(hobby_User_Data)
 //     });
+// }
+
+// const posts = [
+//   {
+//     username: '손흥민',
+//     title: 'Post 1',
+//   },
+//   {
+//     username: '해리케인',
+//     title: 'Post 2',
+//   },
+// ];
+
+// /* POST /user/login */
+// app.post('/login', (req, res) => {
+//   const username = req.body.username;
+//   const password = req.body.password;
+
+//   const user = { name: username };
+//   // 토큰 발행
+//   const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+//     expiresIn: '24h',
+//   });
+//   console.log(accessToken);
+//   // 클라이언트한테 토큰을 보내줌
+//   res.status(200).send({ accessToken: accessToken });
+// });
+
+// /* GET user/information */
+// app.get('/information', authenticateToken, (req, res) => {
+//   // 클라이언트한테 유저의 개인정보 보내줌
+//   res.status(200).send(posts.filter((post) => post.username === req.user.name));
+// });
+
+// /* 토큰 검사 */
+// function authenticateToken(req, res, next) {
+//   const authHeader = req.headers['authorization'];
+//   const token = authHeader && authHeader.split(' ')[1];
+//   if (token === null) return res.sendStatus(401);
+
+//   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+//     if (err) return res.sendStatus(403);
+//     console.log(token);
+//     console.log(user);
+//     req.user = user;
+//     next();
+//   });
 // }

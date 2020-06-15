@@ -1,5 +1,9 @@
-const { users, hobby, idealType, personality } = require('../../models');
+require('dotenv').config();
+
+const { users } = require('../../models');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+
 module.exports = {
   post: (req, res) => {
     let { username, password } = req.body;
@@ -19,36 +23,21 @@ module.exports = {
         if (user.length === 0) {
           res.status(404).send('아이디와 비밀번호가 일치하지 않습니다!');
         } else {
-          let Id = user.dataValues.id;
-          console.log(Id);
-          users
-            .findOne({
-              where: {
-                id: Id,
-              },
-              include: [
-                {
-                  model: hobby,
-                  attributes: ['hobbylist'],
-                  through: { attributes: [] },
-                },
-
-                {
-                  model: personality,
-                  attributes: ['personalitylist'],
-                  through: { attributes: [] },
-                },
-                {
-                  model: idealType,
-                  attributes: ['idealTypelist'],
-                  through: { attributes: [] },
-                },
-              ],
-            })
-            .then((allUserData) => {
-              res.status(200).send(allUserData);
-            });
+          const { username, password } = user.dataValues;
+          const setUser = { username: username, password: password };
+          const accessToken = jwt.sign(
+            setUser,
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+              expiresIn: '24h',
+            }
+          );
+          console.log(accessToken);
+          res.status(200).send({ accessToken: accessToken });
         }
+      })
+      .catch((err) => {
+        res.status(404).send(err);
       });
   },
 };

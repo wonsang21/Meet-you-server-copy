@@ -59,18 +59,15 @@ module.exports = {
 
             .then((values) => {
               /* values = [{id:1, hobbylist: '운동'},{id:2, hobbylist: '여행'}] */
-              const set_Data = [
-                list_Data[i] === 'hobbylist' ? users.setHobbies(values) : null,
 
-                list_Data[i] === 'personalitylist'
-                  ? users.setPersonalities(values)
-                  : null,
-                list_Data[i] === 'idealTypelist'
-                  ? users.setIdealTypes(values)
-                  : null,
-              ];
+              list_Data[i] === 'hobbylist' ? users.setHobbies(values) : null;
 
-              set_Data[i];
+              list_Data[i] === 'personalitylist'
+                ? users.setPersonalities(values)
+                : null;
+              list_Data[i] === 'idealTypelist'
+                ? users.setIdealTypes(values)
+                : null;
             });
         }
         res.status(201).json(data);
