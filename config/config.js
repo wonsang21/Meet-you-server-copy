@@ -1,18 +1,20 @@
 require('dotenv').config();
+const env = process.env;
 
 module.exports = {
   development: {
-    username: process.env.RDS_USERNAME,
-    password: process.env.RDS_USERNAME,
-    host: process.env.RDS_USERNAME,
+    username: env.RDS_USERNAME,
+    password: env.RDS_PASSWOR,
+    host: env.RDS_HOSTNAME,
     database: 'meetyouDB',
     dialect: 'mysql',
+    port: 5000,
     operatorsAliases: false,
   },
   production: {
-    username: process.env.RDS_USERNAME,
-    password: process.env.RDS_PASSWORD,
-    host: process.env.RDS_HOSTNAME,
+    username: env.RDS_USERNAME,
+    password: env.RDS_PASSWORD,
+    host: env.RDS_HOSTNAME,
     database: 'Meet-you',
     dialect: 'mysql',
     port: 13306,
