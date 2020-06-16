@@ -15,7 +15,7 @@ module.exports = {
     username: env.RDS_USERNAME,
     password: env.RDS_PASSWORD,
     host: env.RDS_HOSTNAME,
-    database: 'Meet-you',
+    database: 'meetyoudb',
     dialect: 'mysql',
     port: 13306,
     operatorsAliases: false,
