@@ -16,10 +16,8 @@ module.exports = {
           {
             model: hobby,
             attributes: ['hobbylist'],
-
             through: { attributes: [] },
           },
-
           {
             model: personality,
             attributes: ['personalitylist'],
