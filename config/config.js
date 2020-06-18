@@ -10,13 +10,13 @@ module.exports = {
     dialect: 'mysql',
     operatorsAliases: false,
   },
-  production: {
-    username: env.RDS_USERNAME,
-    password: env.RDS_PASSWORD,
-    host: env.RDS_HOSTNAME,
-    database: 'meetyoudb',
-    dialect: 'mysql',
-    port: 13306,
-    operatorsAliases: false,
-  },
+  // production: {
+  //   username: env.RDS_USERNAME,
+  //   password: env.RDS_PASSWORD,
+  //   host: env.RDS_HOSTNAME,
+  //   database: 'meetyoudb',
+  //   dialect: 'mysql',
+  //   port: 13306,
+  //   operatorsAliases: false,
+  // },
 };

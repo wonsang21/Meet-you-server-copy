@@ -7,15 +7,14 @@ const bodyParser = require('body-parser');
 const models = require('./models/index');
 const app = express();
 const userRouter = require('./routes/user');
-
-// const jwt = require('jsonwebtoken');
+const mainRouter = require('./routes/main');
 
 app.use(bodyParser.json());
 // app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:19002'],
     method: ['GET', 'POST'],
     credentials: true,
   })
@@ -26,6 +25,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/user', userRouter);
+app.use('/main', mainRouter);
 
 const port = 5000;
 app.listen(port, () => {

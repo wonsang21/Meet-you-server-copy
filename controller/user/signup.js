@@ -7,7 +7,7 @@ module.exports = {
       username,
       password,
       address,
-      profile_photo,
+      profile_Photo,
       nickname,
       blood,
       gender,
@@ -16,6 +16,7 @@ module.exports = {
       job,
       school,
     } = req.body;
+
     users
       .findOrCreate({
         where: {
@@ -25,7 +26,7 @@ module.exports = {
           password: password,
           age: age,
           address: address,
-          profile_photo: profile_photo,
+          profile_Photo: profile_Photo,
           nickname: nickname,
           blood: blood,
           gender: gender,
@@ -36,7 +37,6 @@ module.exports = {
         },
       })
       .then(async ([users, created]) => {
-        console.log('test');
         if (!created) {
           return res.status(409).send('Already exists user');
         }

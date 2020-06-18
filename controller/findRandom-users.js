@@ -1,9 +1,9 @@
 const { users, hobby, idealType, personality } = require('../models');
-const { filterHPIData } = require('../controller/filterHPIData');
+const { filterHPIData } = require('./filterHPIData');
 module.exports = {
   findRandomUsers: (gender) => {
     return new Promise((resolve, reject) => {
-      const findGender = gender === 'man' ? 'women' : 'man';
+      const findGender = gender === '남자' ? '여자' : '남자';
 
       users
         .findAll({

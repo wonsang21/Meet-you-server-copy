@@ -12,16 +12,16 @@ models/index.js
   2. models 폴더 아래에 존재하는 js 파일을 모두 로딩
   3. db 객체에 Model을 정의하여 반환
 */
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'production';
 const config = require(__dirname + '/../config/config.js')[
-  env
+  'development'
 ]; /*   '/../config/config.json' => '/../config/config.js'  */
 const db = {};
-
+console.log(config);
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
