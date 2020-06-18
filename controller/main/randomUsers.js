@@ -3,7 +3,7 @@ const { findRandomUsers } = require('../findRandom-users');
 module.exports = {
   get: (req, res) => {
     const { userId } = req.query;
-
+    console.log(req.query);
     users
       .findOne({
         where: {

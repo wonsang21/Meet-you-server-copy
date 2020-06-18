@@ -21,6 +21,9 @@ module.exports = {
           userAddress
         );
         res.status(200).send(olderUsers);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
       });
   },
 };

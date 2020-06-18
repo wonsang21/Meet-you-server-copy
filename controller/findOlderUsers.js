@@ -36,13 +36,14 @@ module.exports = {
         })
         .then(async (users) => {
           if (users.length === 0) {
-            return reject('회원님보다 나이가 많은 유저를 찾을 수 없습니다');
+            return reject(
+              '회원님의 지역에 회원님보다 나이가 많은 유저를 찾을 수 없습니다.'
+            );
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));
             return data;
           });
-          console.log(filterUsersHPI);
           resolve(Promise.all(filterUsersHPI));
         });
     });

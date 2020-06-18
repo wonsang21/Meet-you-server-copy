@@ -8,6 +8,9 @@ module.exports = {
     for (let key in Fake_HobbyData) {
       Fake_HobbyData[key].forEach((number) => {
         let obj = {};
+        // obj = {userId: 1, hobbyId: 1},
+        //        {userId: 1, hobbyId: 7}
+        //        {userId: 1, hobbyId: 8}
         obj.userId = Number(key);
         obj.hobbyId = number;
         InsertDB_Fake_Data.push(obj);
@@ -20,3 +23,9 @@ module.exports = {
     return queryInterface.bulkDelete('hobby_Data', null, {});
   },
 };
+
+// [
+//   { userId: 1, hobbyId: 1 },
+//   { userId: 1, hobbyId: 7 },
+//   { userId: 1, hobbyId: 8 },
+// ]
