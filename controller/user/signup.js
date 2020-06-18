@@ -37,7 +37,6 @@ module.exports = {
         },
       })
       .then(async ([users, created]) => {
-        console.log('test');
         if (!created) {
           return res.status(409).send('Already exists user');
         }
