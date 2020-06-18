@@ -4,19 +4,28 @@ module.exports = {
   up: (queryInterface) => {
     return queryInterface.bulkInsert('idealTypes', [
       {
-        idealTypelist: '외모',
+        idealTypelist: '털털',
       },
       {
-        idealTypelist: '몸매',
+        idealTypelist: '착한',
       },
       {
-        idealTypelist: '돈',
+        idealTypelist: '다정',
       },
       {
-        idealTypelist: '성격',
+        idealTypelist: '순수',
       },
       {
-        idealTypelist: '직업',
+        idealTypelist: '외모 중요',
+      },
+      {
+        idealTypelist: '유머러스한',
+      },
+      {
+        idealTypelist: '열정',
+      },
+      {
+        idealTypelist: '몸매 좋은',
       },
     ]);
   },

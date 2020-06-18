@@ -18,10 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       profile_Photo: DataTypes.STRING,
       nickname: DataTypes.STRING,
       blood: DataTypes.ENUM({
-        values: ['A', 'B', 'AB', 'O'],
+        values: ['A', 'B', 'O', 'AB'],
       }),
       gender: DataTypes.ENUM({
-        values: ['man', 'women'],
+        values: ['남자', '여자'],
       }),
       drinking: DataTypes.STRING,
       smoking: DataTypes.STRING,

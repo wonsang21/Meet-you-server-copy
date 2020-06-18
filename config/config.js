@@ -3,12 +3,11 @@ const env = process.env;
 
 module.exports = {
   development: {
-    username: env.RDS_USERNAME,
-    password: env.RDS_PASSWOR,
-    host: env.RDS_HOSTNAME,
-    database: 'meetyouDB',
+    username: env.DB_USERNAME,
+    password: env.DB_PASSWORD,
+    host: env.DB_HOSTNAME,
+    database: 'MeetyouDB',
     dialect: 'mysql',
-    port: 5000,
     operatorsAliases: false,
   },
   production: {
