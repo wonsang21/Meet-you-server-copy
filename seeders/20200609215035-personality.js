@@ -4,16 +4,25 @@ module.exports = {
   up: (queryInterface) => {
     return queryInterface.bulkInsert('personalities', [
       {
-        personalitylist: '활발한',
+        personalitylist: '활발', // 1
       },
       {
-        personalitylist: '친절한',
+        personalitylist: '털털', // 2
       },
       {
-        personalitylist: '도도한',
+        personalitylist: '순수', // 3
       },
       {
-        personalitylist: '4차원',
+        personalitylist: '다정', // 4
+      },
+      {
+        personalitylist: '열정', // 5
+      },
+      {
+        personalitylist: '친절', // 6
+      },
+      {
+        personalitylist: '착한', // 7
       },
     ]);
   },

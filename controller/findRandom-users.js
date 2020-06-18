@@ -1,5 +1,5 @@
 const { users, hobby, idealType, personality } = require('../models');
-const { filterHPIData } = require('../controller/filterHPIData');
+const { filterHPIData } = require('./filterHPIData');
 module.exports = {
   findRandomUsers: (gender) => {
     return new Promise((resolve, reject) => {
