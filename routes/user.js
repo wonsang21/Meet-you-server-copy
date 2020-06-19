@@ -13,6 +13,9 @@ router.post('/login', userController.login.post);
 // * GET /user/information
 router.get('/information', authenticateToken, userController.information.get);
 
+// * POST /user/profile
+router.post('/profile', userController.profile.post);
+
 // * POST /user/logout
 router.post('/logout', userController.logout.post);
 
