@@ -9,12 +9,44 @@ const app = express();
 const userRouter = require('./routes/user');
 const mainRouter = require('./routes/main');
 
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+// const io = require('socket.io').listen(80);
+
+const socket = require('./controller/chating/socket');
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/client.html');
+});
+
+io.on('connection', socket);
+console.log('++++++', socket);
+
+// io.on('connection', (socket) => {
+//   console.log('++++++', socket);
+//   console.log('접속하셨습니다.');
+//   socket.on('send message', (name, text) => {
+//     let msg = name + ' : ' + text;
+//     console.log(msg);
+//     socket.emit('receive message', msg);
+//   });
+//   socket.on('disconnect', () => {
+//     console.log('떠나셨습니다.');
+//   });
+// });
+
+setInterval(() => {
+  io.emit('ping', { data: new Date() / 1 });
+}, 1000);
+
 app.use(bodyParser.json());
 // app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['http://localhost:19002'],
+    // origin: ['http://localhost:19002'],
+    origin: '*',
     method: ['GET', 'POST'],
     credentials: true,
   })
