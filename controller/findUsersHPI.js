@@ -35,7 +35,9 @@ module.exports = {
           console.log(users);
           if (users.length === 0) {
             const randomUsers = await findRandomUsers(gender);
-            return resolve({ '랜덤 유저': randomUsers });
+            return resolve({
+              '현재 회원님의 지역에 조건에 해당하는 유저가 없습니다. 이런 분들은 어떨까요?': randomUsers,
+            });
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));
@@ -52,7 +54,9 @@ module.exports = {
           });
           if (findUsers.length === 0) {
             const randomUsers = await findRandomUsers(gender);
-            return resolve({ '랜덤 유저': randomUsers });
+            return resolve({
+              '현재 회원님의 지역에 조건에 해당하는 유저가 없습니다. 이런 분들은 어떨까요?': randomUsers,
+            });
           }
 
           resolve(findUsers);
