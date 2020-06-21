@@ -1,4 +1,5 @@
-const { users } = require('../../models');
+const { users, hobby } = require('../../models');
+const { findUsersHPI } = require('../findUsersHPI');
 
 module.exports = {
   get: (req, res) => {
@@ -10,10 +11,28 @@ module.exports = {
         where: {
           id: userId,
         },
+        include: [
+          {
+            model: hobby,
+            attributes: ['hobbylist'],
+            through: { attributes: [] },
+          },
+        ],
       })
       .then(async (user) => {
-        const gender = user.dataValues.gender;
-        gender;
+        const users_Data = JSON.parse(JSON.stringify(user));
+        const { gender, address, hobbies } = users_Data;
+        const key = Object.keys(users_Data).pop();
+        const list = Object.keys(users_Data[key][0])[0];
+        const list_Data = hobbies.map((obj) => {
+          return obj[list];
+        });
+
+        const hobbyUsers = await findUsersHPI(gender, address, key, list_Data);
+        res.status(200).send(hobbyUsers);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
       });
   },
 };

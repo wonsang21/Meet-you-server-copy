@@ -14,9 +14,9 @@ module.exports = {
         const userGender = user.dataValues.gender;
         const userAge = user.dataValues.age;
         const userAddress = user.dataValues.address;
-        const findGender = userGender === '남자' ? '여자' : '남자';
+
         const olderUsers = await findOlderUsers(
-          findGender,
+          userGender,
           userAge,
           userAddress
         );

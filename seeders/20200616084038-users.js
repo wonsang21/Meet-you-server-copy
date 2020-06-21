@@ -1,6 +1,6 @@
 'use strict';
 const { Fake_User } = require('../fake_folder/fakeUser');
-
+////
 module.exports = {
   up: (queryInterface) => {
     let key = [

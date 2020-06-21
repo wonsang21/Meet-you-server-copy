@@ -1,22 +1,17 @@
 const { users, hobby, idealType, personality } = require('../models');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 const { filterHPIData } = require('./filterHPIData');
 const { findRandomUsers } = require('./findRandom-users');
 
 module.exports = {
-  findOlderUsers: (userGender, age, address) => {
+  findUsersHPI: (gender, address, key, list_Data) => {
     return new Promise((resolve, reject) => {
-      const findGender = userGender === '남자' ? '여자' : '남자';
+      const findGender = gender === '남자' ? '여자' : '남자';
 
       users
         .findAll({
           where: {
             gender: findGender,
             address: address,
-            age: {
-              [Op.gt]: age,
-            },
           },
           include: [
             {
@@ -35,21 +30,32 @@ module.exports = {
               through: { attributes: [] },
             },
           ],
-          limit: 4,
         })
         .then(async (users) => {
           console.log(users);
           if (users.length === 0) {
-            const randomUsers = await findRandomUsers(userGender);
-            return resolve({
-              '랜덤 유저': randomUsers,
-            });
+            const randomUsers = await findRandomUsers(gender);
+            return resolve({ '랜덤 유저': randomUsers });
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));
             return data;
           });
-          resolve(Promise.all(filterUsersHPI));
+          let PromiseChangeData = await Promise.all(filterUsersHPI);
+
+          const findUsers = PromiseChangeData.filter((user) => {
+            let includeElemnt = list_Data.some((element) => {
+              return user[key].includes(element);
+            });
+
+            return includeElemnt ? user : false;
+          });
+          if (findUsers.length === 0) {
+            const randomUsers = await findRandomUsers(gender);
+            return resolve({ '랜덤 유저': randomUsers });
+          }
+
+          resolve(findUsers);
         })
         .catch((err) => {
           reject(err);

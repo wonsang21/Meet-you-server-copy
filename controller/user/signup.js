@@ -1,4 +1,9 @@
 const { users, hobby, personality, idealType } = require('../../models');
+const moment = require('moment');
+moment.tz.setDefault('Asia/Seoul');
+const dateAndTime = moment().format('YYYY-MM-DD HH:mm:ss');
+
+/* dataAndTime = "2020-06-19 14:41:02" */
 
 module.exports = {
   post: (req, res) => {
@@ -34,6 +39,7 @@ module.exports = {
           smoking: smoking,
           job: job,
           school: school,
+          signUpCreateTime: dateAndTime,
         },
       })
       .then(async ([users, created]) => {

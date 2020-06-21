@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: 0,
       },
       school: DataTypes.STRING,
+      signUpCreateTime: DataTypes.STRING,
     },
     {
       timestamps: false,

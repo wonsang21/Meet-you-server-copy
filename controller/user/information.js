@@ -1,6 +1,7 @@
 const { users, hobby, idealType, personality } = require('../../models');
 const { findRandomUsers } = require('../findRandom-users');
 const { filterHPIData } = require('../filterHPIData');
+
 module.exports = {
   get: (req, res) => {
     const username = req.username;

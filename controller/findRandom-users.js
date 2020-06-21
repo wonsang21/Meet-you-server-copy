@@ -1,5 +1,6 @@
 const { users, hobby, idealType, personality } = require('../models');
 const { filterHPIData } = require('./filterHPIData');
+
 module.exports = {
   findRandomUsers: (gender) => {
     return new Promise((resolve, reject) => {
@@ -14,6 +15,7 @@ module.exports = {
         })
         .then((data) => {
           const userRandomIds = [];
+
           const userIds = data.map((user) => {
             return user.dataValues.id;
           });
@@ -50,13 +52,16 @@ module.exports = {
             })
             .then(async (users) => {
               if (users.length === 0) {
-                return reject('가입한 남자 유저 또는 여자 유저가 없습니다.');
+                return resolve('가입한 남자 유저 또는 여자 유저가 없습니다.');
               }
               const filterUsersHPI = users.map(async (user) => {
                 let data = await filterHPIData(JSON.stringify(user));
                 return data;
               });
               resolve(Promise.all(filterUsersHPI));
+            })
+            .catch((err) => {
+              reject(err);
             });
         });
     });
