@@ -16,6 +16,7 @@ module.exports = {
       'smoking',
       'job',
       'school',
+      'signUpCreateTime',
     ];
     const InsertDB_Fake_Data = Fake_User.map((PrivacyData) => {
       let obj = {};
