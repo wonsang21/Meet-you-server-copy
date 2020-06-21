@@ -13,9 +13,4 @@
 # controll environment variables
 .env
 
-# 페이크 데이터
-/fake_folder
-/seeders/users.js
-/seeders/20200616091856-hobby-Data.js
-/seeders/20200616091918-personality-Data.js
-/seeders/20200616091934-idealType-Data.js
+

@@ -1,4 +1,5 @@
 const { users } = require('../../models');
+const { inspectUser_Data, updateHPIUserData } = require('../updateHPIUserData');
 
 module.exports = {
   post: (req, res) => {
@@ -18,9 +19,33 @@ module.exports = {
       school,
     } = req.body;
 
-    // const hobby_Data = req.body.hooby;
-    // const personality_Data = req.body.personality;
-    // const idealType_Data = req.body.idealType;
+    const hobbies = req.body.hobby;
+    const personalities = req.body.personality;
+    const idealTypes = req.body.idealType;
+
+    if (
+      !inspectUser_Data(
+        String(id),
+        String(age),
+        username,
+        password,
+        address,
+        profile_Photo,
+        nickname,
+        blood,
+        gender,
+        drinking,
+        smoking,
+        job,
+        school,
+        hobbies,
+        personalities,
+        idealTypes
+      )
+    ) {
+      res.status(404).send('유저의 정보를 다시 확인해주세요.');
+      return;
+    }
 
     users
       .update(
@@ -44,10 +69,12 @@ module.exports = {
           },
         }
       )
-      .then((data) => {
-        if (data[0] === 0)
-          return res.status(404).send('회원의 정보가 바뀌지 않았습니다.');
-        res.status(200).send('회원의 정보가 변경되었습니다.');
+      .then(async () => {
+        await updateHPIUserData(id, hobbies, personalities, idealTypes);
+        res.status(200).send('유저의 정보가 업데이트되었습니다.');
+      })
+      .catch((err) => {
+        res.status(404).send(err);
       });
   },
 };
