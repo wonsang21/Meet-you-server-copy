@@ -51,6 +51,9 @@ module.exports = {
       school: {
         type: Sequelize.STRING,
       },
+      signUpCreateTime: {
+        type: Sequelize.STRING,
+      },
     });
   },
   down: (queryInterface) => {
