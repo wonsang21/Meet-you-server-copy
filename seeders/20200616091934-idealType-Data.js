@@ -1,6 +1,6 @@
 'use strict';
 const { Fake_idealTypeData } = require('../fake_folder/fake_idealType');
-//
+////
 module.exports = {
   up: (queryInterface) => {
     const InsertDB_Fake_Data = [];

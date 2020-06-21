@@ -1,6 +1,6 @@
 'use strict';
 const { Fake_personalityData } = require('../fake_folder/fake_personalityData');
-//
+////
 module.exports = {
   up: (queryInterface) => {
     const InsertDB_Fake_Data = [];
