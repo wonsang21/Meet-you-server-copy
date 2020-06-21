@@ -5,42 +5,35 @@ module.exports = {
   post: (req, res) => {
     const {
       id,
-      age,
-      username,
       password,
       address,
       profile_Photo,
       nickname,
       blood,
-      gender,
       drinking,
       smoking,
       job,
       school,
+      hobby,
+      personality,
+      idealType,
     } = req.body;
-
-    const hobbies = req.body.hobby;
-    const personalities = req.body.personality;
-    const idealTypes = req.body.idealType;
 
     if (
       !inspectUser_Data(
         String(id),
-        String(age),
-        username,
         password,
         address,
         profile_Photo,
         nickname,
         blood,
-        gender,
         drinking,
         smoking,
         job,
         school,
-        hobbies,
-        personalities,
-        idealTypes
+        hobby,
+        personality,
+        idealType
       )
     ) {
       res.status(404).send('유저의 정보를 다시 확인해주세요.');
@@ -50,14 +43,11 @@ module.exports = {
     users
       .update(
         {
-          age: age,
-          username: username,
           password: password,
           address: address,
           profile_Photo: profile_Photo,
           nickname: nickname,
           blood: blood,
-          gender: gender,
           drinking: drinking,
           smoking: smoking,
           job: job,
@@ -70,7 +60,7 @@ module.exports = {
         }
       )
       .then(async () => {
-        await updateHPIUserData(id, hobbies, personalities, idealTypes);
+        await updateHPIUserData(id, hobby, personality, idealType);
         res.status(200).send('유저의 정보가 업데이트되었습니다.');
       })
       .catch((err) => {
