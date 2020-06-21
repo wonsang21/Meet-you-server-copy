@@ -1,5 +1,6 @@
 const { users, hobby, idealType, personality } = require('../models');
 const { filterHPIData } = require('./filterHPIData');
+const { findRandomUsers } = require('./findRandom-users');
 
 module.exports = {
   findUsersHPI: (gender, address, key, list_Data) => {
@@ -31,8 +32,10 @@ module.exports = {
           ],
         })
         .then(async (users) => {
+          console.log(users);
           if (users.length === 0) {
-            return reject(`회원님의 지역에서는 찾을 수가 없습니다.`);
+            const randomUsers = await findRandomUsers(gender);
+            return resolve({ '랜덤 유저': randomUsers });
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));
@@ -47,6 +50,11 @@ module.exports = {
 
             return includeElemnt ? user : false;
           });
+          if (findUsers.length === 0) {
+            const randomUsers = await findRandomUsers(gender);
+            return resolve({ '랜덤 유저': randomUsers });
+          }
+
           resolve(findUsers);
         })
         .catch((err) => {
