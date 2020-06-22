@@ -42,7 +42,7 @@ module.exports = {
           if (users.length === 0) {
             const randomUsers = await findRandomUsers(userGender);
             return resolve({
-              '랜덤 유저': randomUsers,
+              '현재 회원님의 지역에 조건에 해당하는 유저가 없습니다. 이런 분들은 어떨까요?': randomUsers,
             });
           }
           const filterUsersHPI = users.map(async (user) => {

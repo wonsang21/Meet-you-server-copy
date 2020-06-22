@@ -13,13 +13,3 @@
 # controll environment variables
 .env
 
-<<<<<<< HEAD
-# 페이크 데이터
-/fake_folder
-/seeders/20200616084038-users.js
-/seeders/20200616091856-hobby-Data.js
-/seeders/20200616091918-personality-Data.js
-/seeders/20200616091934-idealType-Data.js
-=======
-
->>>>>>> Dev

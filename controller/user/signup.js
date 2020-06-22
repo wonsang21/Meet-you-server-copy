@@ -2,7 +2,7 @@ const { users, hobby, personality, idealType } = require('../../models');
 const moment = require('moment');
 moment.tz.setDefault('Asia/Seoul');
 const dateAndTime = moment().format('YYYY-MM-DD HH:mm:ss');
-
+console.log('한국 현재 시각', dateAndTime);
 /* dataAndTime = "2020-06-19 14:41:02" */
 
 module.exports = {
@@ -77,6 +77,9 @@ module.exports = {
             });
         }
         res.status(201).json(data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   },
 };

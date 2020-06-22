@@ -11,9 +11,6 @@ const mainRouter = require('./routes/main');
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-
-// const io = require('socket.io').listen(80);
-
 const socket = require('./controller/chating/socket');
 
 app.get('/', function (req, res) {
@@ -21,20 +18,6 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', socket);
-console.log('++++++', socket);
-
-// io.on('connection', (socket) => {
-//   console.log('++++++', socket);
-//   console.log('접속하셨습니다.');
-//   socket.on('send message', (name, text) => {
-//     let msg = name + ' : ' + text;
-//     console.log(msg);
-//     socket.emit('receive message', msg);
-//   });
-//   socket.on('disconnect', () => {
-//     console.log('떠나셨습니다.');
-//   });
-// });
 
 setInterval(() => {
   io.emit('ping', { data: new Date() / 1 });
@@ -45,8 +28,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    // origin: ['http://localhost:19002'],
-    origin: '*',
+    origin: ['http://localhost:19002'],
+    // origin: '*',
     method: ['GET', 'POST'],
     credentials: true,
   })
@@ -59,9 +42,13 @@ app.get('/', (req, res) => {
 app.use('/user', userRouter);
 app.use('/main', mainRouter);
 
-const port = 5000;
-app.listen(port, () => {
-  console.log(`server listen on 5000`);
+// const port = 5000;
+// app.listen(port, () => {
+//   console.log(`server listen on 5000`);
+// });
+
+server.listen(3000, function () {
+  console.log('server on!');
 });
 
 models.sequelize

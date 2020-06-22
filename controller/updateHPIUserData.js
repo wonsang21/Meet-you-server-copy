@@ -7,6 +7,7 @@ module.exports = {
     });
     return inscpect_result;
   },
+
   updateHPIUserData: (userId, hobbies, personalities, idealTypes) => {
     return new Promise((resolve, reject) => {
       const list = ['hobbylist', 'personalitylist', 'idealTypelist'];

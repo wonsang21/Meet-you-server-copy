@@ -1,4 +1,4 @@
-const socket = function () {
+const socket = function (socket) {
   console.log('connection chting start');
 
   socket.on('send message', (name, text) => {
