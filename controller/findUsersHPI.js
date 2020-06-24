@@ -1,5 +1,6 @@
 const { users, hobby, idealType, personality } = require('../models');
 const { filterHPIData } = require('./filterHPIData');
+const Sequelize = require('sequelize');
 const { findRandomUsers } = require('./findRandom-users');
 
 module.exports = {
@@ -30,14 +31,13 @@ module.exports = {
               through: { attributes: [] },
             },
           ],
+          limit: 4,
+          order: Sequelize.literal('rand()'),
         })
         .then(async (users) => {
-          console.log(users);
+          const radomUsers = await findRandomUsers(gender);
           if (users.length === 0) {
-            const randomUsers = await findRandomUsers(gender);
-            return resolve({
-              '현재 회원님의 지역에 조건에 해당하는 유저가 없습니다. 이런 분들은 어떨까요?': randomUsers,
-            });
+            return resolve(radomUsers);
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));
@@ -53,12 +53,8 @@ module.exports = {
             return includeElemnt ? user : false;
           });
           if (findUsers.length === 0) {
-            const randomUsers = await findRandomUsers(gender);
-            return resolve({
-              '현재 회원님의 지역에 조건에 해당하는 유저가 없습니다. 이런 분들은 어떨까요?': randomUsers,
-            });
+            return resolve(radomUsers);
           }
-
           resolve(findUsers);
         })
         .catch((err) => {

@@ -26,4 +26,7 @@ router.post('/profile', userController.profile.post);
 // * POST /user/logout
 router.post('/logout', userController.logout.post);
 
+// * GET /user/deleteUser
+router.get('/deleteUser', userController.deleteUser.get);
+
 module.exports = router;
