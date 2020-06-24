@@ -1,5 +1,6 @@
 const { users, hobby, personality, idealType } = require('../models');
 const { filterHPIData } = require('./filterHPIData');
+const { findRandomUsers } = require('./findRandom-users');
 
 module.exports = {
   findRecenetlyUsers: (gender, address) => {
@@ -34,13 +35,16 @@ module.exports = {
           limit: 4,
         })
         .then(async (users) => {
+          console.log(JSON.parse(JSON.stringify(users)));
           if (users.length === 0) {
-            return resolve('해당 유저가 없습니다.');
+            const randoemUsers = await findRandomUsers(gender);
+            return resolve(randoemUsers);
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));
             return data;
           });
+          console.log(await Promise.all(filterUsersHPI));
           resolve(Promise.all(filterUsersHPI));
         })
         .catch((err) => {

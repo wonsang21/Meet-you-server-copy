@@ -22,6 +22,8 @@ module.exports = {
       school,
     } = req.body;
 
+    console.log(address);
+
     users
       .findOrCreate({
         where: {

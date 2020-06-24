@@ -5,4 +5,5 @@ module.exports = {
   information: require('./information'),
   auth: require('./auth'),
   profile: require('./profile'),
+  deleteUser: require('./deleteUser'),
 };

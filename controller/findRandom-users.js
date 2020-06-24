@@ -1,5 +1,6 @@
 const { users, hobby, idealType, personality } = require('../models');
 const { filterHPIData } = require('./filterHPIData');
+const Sequelize = require('sequelize');
 
 module.exports = {
   findRandomUsers: (gender) => {
@@ -11,58 +12,39 @@ module.exports = {
           where: {
             gender: findGender,
           },
-          attributes: ['id'],
+          include: [
+            {
+              model: hobby,
+              attributes: ['hobbylist'],
+              through: { attributes: [] },
+            },
+
+            {
+              model: personality,
+              attributes: ['personalitylist'],
+              through: { attributes: [] },
+            },
+            {
+              model: idealType,
+              attributes: ['idealTypelist'],
+              through: { attributes: [] },
+            },
+          ],
+          limit: 2,
+          order: Sequelize.literal('rand()'),
         })
-        .then((data) => {
-          const userRandomIds = [];
-
-          const userIds = data.map((user) => {
-            return user.dataValues.id;
-          });
-
-          for (let i = 0; i < 2; i++) {
-            let randomId = userIds[Math.floor(Math.random() * userIds.length)];
-            userRandomIds.push(randomId);
-            userIds.splice(userIds.indexOf(randomId), 1);
+        .then((users) => {
+          if (users.length === 0) {
+            return resolve([]);
           }
-
-          users
-            .findAll({
-              where: {
-                id: userRandomIds,
-              },
-              include: [
-                {
-                  model: hobby,
-                  attributes: ['hobbylist'],
-                  through: { attributes: [] },
-                },
-
-                {
-                  model: personality,
-                  attributes: ['personalitylist'],
-                  through: { attributes: [] },
-                },
-                {
-                  model: idealType,
-                  attributes: ['idealTypelist'],
-                  through: { attributes: [] },
-                },
-              ],
-            })
-            .then(async (users) => {
-              if (users.length === 0) {
-                return resolve('가입한 남자 유저 또는 여자 유저가 없습니다.');
-              }
-              const filterUsersHPI = users.map(async (user) => {
-                let data = await filterHPIData(JSON.stringify(user));
-                return data;
-              });
-              resolve(Promise.all(filterUsersHPI));
-            })
-            .catch((err) => {
-              reject(err);
-            });
+          const filterUsersHPI = users.map(async (user) => {
+            let data = await filterHPIData(JSON.stringify(user));
+            return data;
+          });
+          resolve(Promise.all(filterUsersHPI));
+        })
+        .catch((err) => {
+          reject(err);
         });
     });
   },
