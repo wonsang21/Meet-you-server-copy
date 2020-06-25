@@ -38,7 +38,7 @@ module.exports = {
               through: { attributes: [] },
             },
           ],
-          limit: 4,
+          limit: 6,
           order: Sequelize.literal('rand()'),
         })
         .then(async (users) => {

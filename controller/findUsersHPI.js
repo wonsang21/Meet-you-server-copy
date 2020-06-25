@@ -34,11 +34,12 @@ module.exports = {
               through: { attributes: [] },
             },
           ],
-          limit: 4,
+          limit: 6,
           order: Sequelize.literal('rand()'),
         })
         .then(async (users) => {
           const radomUsers = await findRandomUsers(gender);
+
           if (users.length === 0) {
             return resolve(radomUsers);
           }

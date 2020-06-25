@@ -35,7 +35,7 @@ module.exports = {
             },
           ],
           order: [['id', 'DESC']],
-          limit: 4,
+          limit: 6,
         })
         .then(async (users) => {
           if (users.length === 0) {
