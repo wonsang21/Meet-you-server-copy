@@ -34,7 +34,7 @@ module.exports = {
             },
           ],
 
-          limit: 2,
+          limit: 4,
           order: Sequelize.literal('rand()'),
         })
         .then((users) => {

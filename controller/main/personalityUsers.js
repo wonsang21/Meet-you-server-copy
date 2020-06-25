@@ -22,10 +22,10 @@ module.exports = {
       })
       .then(async (user) => {
         const users_Data = JSON.parse(JSON.stringify(user));
-        const { gender, address, personalities } = users_Data;
+        const { gender, address, personality } = users_Data;
         const key = Object.keys(users_Data).pop();
         const list = Object.keys(users_Data[key][0])[0];
-        const list_Data = personalities.map((obj) => {
+        const list_Data = personality.map((obj) => {
           return obj[list];
         });
 

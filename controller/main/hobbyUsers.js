@@ -14,7 +14,7 @@ module.exports = {
         include: [
           {
             model: hobby,
-            as: 'personality',
+            as: 'hobby',
             attributes: ['hobbylist'],
             through: { attributes: [] },
           },
@@ -22,10 +22,10 @@ module.exports = {
       })
       .then(async (user) => {
         const users_Data = JSON.parse(JSON.stringify(user));
-        const { gender, address, hobbies } = users_Data;
+        const { gender, address, hobby } = users_Data;
         const key = Object.keys(users_Data).pop();
         const list = Object.keys(users_Data[key][0])[0];
-        const list_Data = hobbies.map((obj) => {
+        const list_Data = hobby.map((obj) => {
           return obj[list];
         });
 
