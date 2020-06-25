@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface) => {
-    return queryInterface.bulkInsert('idealTypes', [
+    return queryInterface.bulkInsert('idealType', [
       {
         idealTypelist: '털털', // 1
       },
@@ -31,6 +31,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.bulkDelete('idealTypes', null, {});
+    return queryInterface.bulkDelete('idealType', null, {});
   },
 };

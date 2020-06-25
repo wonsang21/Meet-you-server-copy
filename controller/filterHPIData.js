@@ -2,7 +2,7 @@ module.exports = {
   filterHPIData: (user) => {
     return new Promise((resolve, reject) => {
       let user_Data = JSON.parse(user);
-      let HPIs = ['hobbies', 'personalities', 'idealTypes'];
+      let HPIs = ['hobby', 'personality', 'idealType'];
       let HPIlist = ['hobbylist', 'personalitylist', 'idealTypelist'];
 
       if (Object.keys(user).length === 0) {

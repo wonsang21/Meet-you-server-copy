@@ -14,6 +14,7 @@ module.exports = {
         include: [
           {
             model: idealType,
+            as: 'idealType',
             attributes: ['idealTypelist'],
             through: { attributes: [] },
           },

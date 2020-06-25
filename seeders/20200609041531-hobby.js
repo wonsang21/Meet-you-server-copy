@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface) => {
-    return queryInterface.bulkInsert('hobbies', [
+    return queryInterface.bulkInsert('hobby', [
       {
         hobbylist: '영화 보기', // 1
       },
@@ -31,6 +31,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.bulkDelete('hobbies', null, {});
+    return queryInterface.bulkDelete('hobby', null, {});
   },
 };

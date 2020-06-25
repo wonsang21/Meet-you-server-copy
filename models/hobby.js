@@ -5,8 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       hobbylist: DataTypes.STRING,
     },
-
-    { timestamps: false }
+    {
+      freezeTableName: true,
+      timestamps: false,
+    }
   );
   hobby.associate = function (models) {
     hobby.belongsToMany(models.users, {
