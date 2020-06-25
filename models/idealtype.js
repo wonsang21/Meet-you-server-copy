@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       idealTypelist: DataTypes.STRING,
     },
-    { timestamps: false }
+    {
+      freezeTableName: true,
+      timestamps: false,
+    }
   );
   idealType.associate = function (models) {
     idealType.belongsToMany(models.users, {

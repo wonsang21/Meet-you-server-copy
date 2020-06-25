@@ -6,7 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       problem: DataTypes.STRING,
       solution: DataTypes.STRING,
     },
-    { timestamps: false }
+    {
+      freezeTableName: true,
+      timestamps: false,
+    }
   );
   miniGame.associate = function (models) {
     miniGame.belongsToMany(models.users, {

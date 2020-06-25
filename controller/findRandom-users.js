@@ -15,21 +15,25 @@ module.exports = {
           include: [
             {
               model: hobby,
+              as: 'hobby',
               attributes: ['hobbylist'],
               through: { attributes: [] },
             },
 
             {
               model: personality,
+              as: 'personality',
               attributes: ['personalitylist'],
               through: { attributes: [] },
             },
             {
               model: idealType,
+              as: 'idealType',
               attributes: ['idealTypelist'],
               through: { attributes: [] },
             },
           ],
+
           limit: 2,
           order: Sequelize.literal('rand()'),
         })

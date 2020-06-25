@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface) => {
-    return queryInterface.bulkInsert('miniGames', [
+    return queryInterface.bulkInsert('miniGame', [
       {
         problem: '어부들이 제일 싫어하는 연예인은?',
         solution: '배철수',
@@ -45,6 +45,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.bulkDelete('miniGames', null, {});
+    return queryInterface.bulkDelete('miniGame', null, {});
   },
 };

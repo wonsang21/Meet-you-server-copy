@@ -16,17 +16,20 @@ module.exports = {
           include: [
             {
               model: hobby,
+              as: 'hobby',
               attributes: ['hobbylist'],
               through: { attributes: [] },
             },
 
             {
               model: personality,
+              as: 'personality',
               attributes: ['personalitylist'],
               through: { attributes: [] },
             },
             {
               model: idealType,
+              as: 'idealType',
               attributes: ['idealTypelist'],
               through: { attributes: [] },
             },
@@ -35,7 +38,6 @@ module.exports = {
           limit: 4,
         })
         .then(async (users) => {
-          console.log(JSON.parse(JSON.stringify(users)));
           if (users.length === 0) {
             const randoemUsers = await findRandomUsers(gender);
             return resolve(randoemUsers);
@@ -44,7 +46,7 @@ module.exports = {
             let data = await filterHPIData(JSON.stringify(user));
             return data;
           });
-          console.log(await Promise.all(filterUsersHPI));
+
           resolve(Promise.all(filterUsersHPI));
         })
         .catch((err) => {

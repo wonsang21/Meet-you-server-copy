@@ -40,13 +40,11 @@ module.exports = {
                 },
               })
               .then((values) => {
-                listItem === 'hobbylist' ? user.setHobbies(values) : null;
+                listItem === 'hobbylist' ? user.setHobby(values) : null;
                 listItem === 'personalitylist'
-                  ? user.setPersonalities(values)
+                  ? user.setPersonality(values)
                   : null;
-                listItem === 'idealTypelist'
-                  ? user.setIdealTypes(values)
-                  : null;
+                listItem === 'idealTypelist' ? user.setIdealType(values) : null;
               });
           });
         });
