@@ -14,6 +14,7 @@ module.exports = {
         include: [
           {
             model: personality,
+            as: 'personality',
             attributes: ['personalitylist'],
             through: { attributes: [] },
           },

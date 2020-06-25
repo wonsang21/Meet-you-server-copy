@@ -1,5 +1,6 @@
 const { users, hobby, personality, idealType } = require('../models');
 const { filterHPIData } = require('./filterHPIData');
+const { findRandomUsers } = require('./findRandom-users');
 
 module.exports = {
   findRecenetlyUsers: (gender, address) => {
@@ -15,17 +16,20 @@ module.exports = {
           include: [
             {
               model: hobby,
+              as: 'hobby',
               attributes: ['hobbylist'],
               through: { attributes: [] },
             },
 
             {
               model: personality,
+              as: 'personality',
               attributes: ['personalitylist'],
               through: { attributes: [] },
             },
             {
               model: idealType,
+              as: 'idealType',
               attributes: ['idealTypelist'],
               through: { attributes: [] },
             },
@@ -35,12 +39,14 @@ module.exports = {
         })
         .then(async (users) => {
           if (users.length === 0) {
-            return resolve('해당 유저가 없습니다.');
+            const randoemUsers = await findRandomUsers(gender);
+            return resolve(randoemUsers);
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));
             return data;
           });
+
           resolve(Promise.all(filterUsersHPI));
         })
         .catch((err) => {

@@ -22,6 +22,8 @@ module.exports = {
       school,
     } = req.body;
 
+    console.log(address);
+
     users
       .findOrCreate({
         where: {
@@ -66,13 +68,13 @@ module.exports = {
             .then((values) => {
               /* values = [{id:1, hobbylist: '운동'},{id:2, hobbylist: '여행'}] */
 
-              list_Data[i] === 'hobbylist' ? users.setHobbies(values) : null;
+              list_Data[i] === 'hobbylist' ? users.setHobby(values) : null;
 
               list_Data[i] === 'personalitylist'
-                ? users.setPersonalities(values)
+                ? users.setPersonality(values)
                 : null;
               list_Data[i] === 'idealTypelist'
-                ? users.setIdealTypes(values)
+                ? users.setIdealType(values)
                 : null;
             });
         }

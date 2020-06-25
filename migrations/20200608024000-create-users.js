@@ -32,7 +32,7 @@ module.exports = {
       },
       gender: {
         type: Sequelize.ENUM({
-          values: ['man', 'women'],
+          values: ['남자', '여자'],
         }),
       },
       drinking: {

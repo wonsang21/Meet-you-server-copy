@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: false,
+
       hooks: {
         afterValidate: (data) => {
           var shasum = crypto.createHash('sha1');
@@ -47,22 +48,25 @@ module.exports = (sequelize, DataTypes) => {
   );
   users.associate = function (models) {
     users.belongsToMany(models.hobby, {
+      as: 'hobby',
       through: 'hobby_Data',
       foreignKey: 'userId',
     }),
       users.belongsToMany(models.personality, {
+        as: 'personality',
         through: 'personality_Data',
         foreignKey: 'userId',
       });
     users.belongsToMany(models.idealType, {
+      as: 'idealType',
       through: 'idealType_Data',
       foreignKey: 'userId',
     });
 
-    // users.belongsToMany(models.miniGame, {
-    //   through: 'miniGame_Data',
-    //   foreignKey: 'userId',
-    // });
+    users.belongsToMany(models.miniGame, {
+      through: 'miniGame_Data',
+      foreignKey: 'userId',
+    });
   };
 
   return users;

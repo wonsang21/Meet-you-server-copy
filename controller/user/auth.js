@@ -5,8 +5,11 @@ let tempAuthObj = {};
 module.exports = {
   postauth: async (req, res) => {
     let { userphone, verifynum } = req.body;
+    verifynum;
+    console.log(userphone);
     try {
       tempAuthObj = await twilioUtils.auth(userphone);
+      console.log(tempAuthObj);
       if (tempAuthObj instanceof Error) {
         res.status(500).json({ error: tempAuthObj.message });
       } else {

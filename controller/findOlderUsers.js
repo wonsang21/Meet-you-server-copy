@@ -21,29 +21,31 @@ module.exports = {
           include: [
             {
               model: hobby,
+              as: 'hobby',
               attributes: ['hobbylist'],
               through: { attributes: [] },
             },
             {
               model: personality,
+              as: 'personality',
               attributes: ['personalitylist'],
               through: { attributes: [] },
             },
             {
               model: idealType,
+              as: 'idealType',
               attributes: ['idealTypelist'],
               through: { attributes: [] },
             },
           ],
           limit: 4,
+          order: Sequelize.literal('rand()'),
         })
         .then(async (users) => {
           console.log(users);
           if (users.length === 0) {
-            const randomUsers = await findRandomUsers(userGender);
-            return resolve({
-              '현재 회원님의 지역에 조건에 해당하는 유저가 없습니다. 이런 분들은 어떨까요?': randomUsers,
-            });
+            const radomUsers = await findRandomUsers(userGender);
+            return resolve(radomUsers);
           }
           const filterUsersHPI = users.map(async (user) => {
             let data = await filterHPIData(JSON.stringify(user));

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface) => {
-    return queryInterface.bulkInsert('personalities', [
+    return queryInterface.bulkInsert('personality', [
       {
         personalitylist: '활발', // 1
       },
@@ -28,6 +28,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.bulkDelete('personalities', null, {});
+    return queryInterface.bulkDelete('personality', null, {});
   },
 };

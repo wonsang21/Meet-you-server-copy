@@ -8,6 +8,7 @@ const models = require('./models/index');
 const app = express();
 const userRouter = require('./routes/user');
 const mainRouter = require('./routes/main');
+const miniRouter = require('./routes/mini');
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -28,8 +29,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['http://localhost:19002'],
-    // origin: '*',
+    origin: '*',
     method: ['GET', 'POST'],
     credentials: true,
   })
@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 
 app.use('/user', userRouter);
 app.use('/main', mainRouter);
+app.use('/mini', miniRouter);
 
 // const port = 5000;
 // app.listen(port, () => {
