@@ -5,6 +5,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = twilio(accountSid, authToken);
 const tempAuthObj = {};
+
 module.exports = {
   auth: async (userphone) => {
     const authNumber = Math.floor(Math.random() * 10000);

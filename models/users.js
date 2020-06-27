@@ -67,6 +67,10 @@ module.exports = (sequelize, DataTypes) => {
       through: 'miniGame_Data',
       foreignKey: 'userId',
     });
+    // users.hasMany(models.chattings, {
+    //   foreignKey: 'username',
+    //   // constraint: false,
+    // });
   };
 
   return users;
