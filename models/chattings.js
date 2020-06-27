@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       userName: DataTypes.STRING,
       message: {
         type: DataTypes.STRING,
-        defaultValue: '[]',
       },
       roomName: DataTypes.STRING,
     },

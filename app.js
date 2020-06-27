@@ -33,10 +33,6 @@ app.get('/', (req, res) => {
 //   });
 // });
 
-server.listen(3000, function () {
-  console.log('server on!');
-});
-
 // const server = app.listen(3000, function () {
 //   console.log('server On!');
 // });
@@ -173,10 +169,10 @@ app.use('/main', mainRouter);
 app.use('/mini', miniRouter);
 app.use('/minosPoint', pointRouter);
 
-// const port = 5000;
-// app.listen(port, () => {
-//   console.log(`server listen on 5000`);
-// });
+const port = 5000;
+app.listen(port, () => {
+  console.log(`server listen on 5000`);
+});
 
 models.sequelize
   .sync()
@@ -187,3 +183,66 @@ models.sequelize
     console.log('DB 연결 실패ㅠㅠ');
     console.log(err);
   });
+
+const { chattings } = require('./models');
+
+app.post('/chatMsgAndRoomSave', (req, res) => {
+  // req.body = [원상님이 보내주시는 객체들]
+  const { userName, message, roomName } = req.body;
+  const MessageConvertJson = JSON.stringify(message);
+
+  chattings
+    .findAll({
+      where: {
+        userName: userName,
+        roomName: roomName,
+      },
+      raw: true,
+    })
+    .then((data) => {
+      if (data.length === 0) {
+        chattings.create({
+          userName: userName,
+          roomName: roomName,
+          message: MessageConvertJson,
+        });
+        return res.status(200).send('유저의 채팅 목록을 저장하였습니다.');
+      }
+      let insertedMessage = data[0].message;
+      let parsing_Message = JSON.parse(insertedMessage);
+      message.forEach((obj) => {
+        parsing_Message.push(obj);
+      });
+      let convertJson = JSON.stringify(parsing_Message);
+      chattings.update(
+        {
+          message: convertJson,
+        },
+        {
+          where: {
+            userName: userName,
+            roomName: roomName,
+          },
+        }
+      );
+      res.status(200).send('유저의 메세지를 추가하였습니다.');
+    });
+});
+
+app.post('/chatInfo', (req, res) => {
+  const { userName, roomName } = req.body;
+  chattings
+    .findOne({
+      where: {
+        userName: userName,
+        roomName: roomName,
+      },
+      attributes: ['message'],
+    })
+    .then((data) => {
+      const user_message = data.get({ plain: true });
+      const { message } = user_message;
+      const parsing_Message = JSON.parse(message);
+      res.status(200).send(parsing_Message);
+    });
+});
