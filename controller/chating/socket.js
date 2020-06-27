@@ -1,14 +1,19 @@
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
 const socket = function (socket) {
-  console.log('connection chting start');
+  console.log('채팅시작');
 
   socket.on('send message', (name, text) => {
     let msg = name + ' : ' + text;
     console.log(msg);
-    socket.emit('receive message', msg);
+    io.emit('receive message', msg);
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log('채팅종료');
   });
 };
 
