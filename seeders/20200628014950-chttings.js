@@ -1,42 +1,33 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: (queryInterface) => {
-    return queryInterface.bulkInsert('chattings', [
+    let message = [
       {
-        userName: '공유',
-
-        roomName: '공유김지원',
+        _id: "04e38f68-4a31-46bc-9a9b-03485c9ccb67",
+        createdAt: new Date(),
+        text: "안뇽",
+        user: {
+          _id: "김지원",
+          avatar:
+            "https://www.nbnnews.co.kr/news/photo/201909/322891_370889_190.jpg",
+          name: "존예보스 김지원",
+        },
       },
+    ];
+    let json = JSON.stringify(message);
+    return queryInterface.bulkInsert("chattings", [
       {
-        userName: '김지원',
+        userName: "공유",
 
-        roomName: '공유김지원',
-      },
-      {
-        userName: '공유',
+        message: json,
 
-        roomName: '공유문채원',
-      },
-      {
-        userName: '문채원',
-
-        roomName: '공유문채원',
-      },
-      {
-        userName: '지효',
-
-        roomName: '지효공유',
-      },
-      {
-        userName: '공유',
-
-        roomName: '지효공유',
+        roomName: "공유김지원",
       },
     ]);
   },
 
   down: (queryInterface) => {
-    return queryInterface.bulkDelete('chattings', null, {});
+    return queryInterface.bulkDelete("chattings", null, {});
   },
 };
