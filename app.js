@@ -13,12 +13,13 @@ const pointRouter = require("./routes/point");
 const { chattings } = require("./models");
 const http = require("http");
 const server = http.createServer(app);
-const io = require("socket.io")(server);
-const { rooms } = require("./rooms");
-const { Op } = require("sequelize");
 
-app.get("/", (req, res) => {
-  res.send("Hello Express");
+const io = require('socket.io')(server);
+const { rooms } = require('./rooms');
+const { Op } = require('sequelize');
+app.get('/', (req, res) => {
+  res.send('Hello Express');
+
 });
 app.use(bodyParser.json());
 const port = 5000;
@@ -47,7 +48,6 @@ app.use(
   })
 );
 // socket io client 통신부분
-
 // socket 통신 연결 성공시
 io.on("connection", async (socket) => {
   let roomNames = await rooms();
@@ -86,14 +86,18 @@ io.on("connection", async (socket) => {
           .then((data) => {
             if (data[0].message !== null) {
               let data_parse = JSON.parse(data[0].message);
+
               console.log("DB에서 룸에 저장된 메시지를 불러옴 => ", data_parse);
               socket.emit("messages", data_parse); // DB에서 불러온 채팅방 메시지를 클라이언트로 보내준다.
+
             }
           });
         break;
       } else {
         count++;
+
         console.log("카운트 값: ", count);
+
         // 특정 룸이 없다면 새로 룸만 생성한다.
         if (count === roomNames.length) {
           console.log("fail", "해당룸은 존재 하지 않아서 새로 생성하겠습니다.");
@@ -114,7 +118,8 @@ io.on("connection", async (socket) => {
         }
       }
     }
-    socket.on("message", (newMessage) => {
+
+    socket.on('message', (newMessage) => {
       const myUsername = roomInfo.myUsername;
       const pairname = roomInfo.username;
       const roomName1 = myUsername + pairname;
@@ -162,6 +167,7 @@ io.on("connection", async (socket) => {
               }
             );
           }
+
           socket.broadcast.to(data[0].roomName).emit("message", newMessage); // {...}
           console.log("상대방에게 보내는 메시지", newMessage);
         });
@@ -169,7 +175,6 @@ io.on("connection", async (socket) => {
   });
   // 클라이언트에서 보내온 채팅메시지를 같은룸의 상대방에게 보낸다.
 });
-
 // roomInfo.myUsername = '공유',
 // message = {...}
 // const myUsername = '공유';
@@ -179,7 +184,7 @@ io.on("connection", async (socket) => {
 //   공유왈: '김지원 예쁘다',
 // };
 
-app.post("/roomName", (req, res) => {
+app.post('/roomName', (req, res) => {
   const { username } = req.body;
   chattings
     .findAll({
